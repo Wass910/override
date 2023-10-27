@@ -1,0 +1,13 @@
+la fonction decrypt est une fonction qui effectue juste un xor avec la valeur input sur la 
+chaine  "Q}|u`sfg~sf{}|a3"
+
+et que si la comparaison de buff apres ce xor est egale a "Congratulations!"
+
+alors on execute un shell.
+
+il suffit juste de trouver quel valeur avoir a input et on trouve 18.
+
+on voit ds la fonction test que la valeur envoye a decrypt est 322424845 - la valeur rentre par l utilisateur
+
+il suffit juste donc de mettre comme mot de passe 322424845 - 18 donc 322424827
+et voila

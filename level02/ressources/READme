@@ -1,0 +1,17 @@
+on voit ds le code que l on print a la fin le buf_user directement ds le printf ce qui nous la string exploit
+
+on regarde donc avec notre payload les adresse et on cherche ou ce remplit le buff_user
+
+on voit que la derniere variable a etre remplit avant notre buff user est le buf_file donc la ou il y a notre mot de passe
+
+python -c 'print "BBBB" + "%x " * 50' > /tmp/payload2
+
+on repere le 42424242 et on relance avec les adresse
+
+python -c 'print "%p " * 50' > /tmp/payload2
+
+on voit que avant l adresse de 42424242 on a 5 adresse entouree de deux adresse nul 
+
+on remarque aisement que c surement de l hexadecimal a reconvertir en ascii sans les 0x.
+
+on test et on obtient un flag
