@@ -1,0 +1,21 @@
+on peut le resoudre juste avec gdb
+
+deja on va annuler les appels a ptrace pour pourvoir lancer le binaire en mode debogage
+
+catch syscall ptrace
+puis
+commands 1 
+
+set $eax=0
+continue
+end
+
+on break juste avant la comparaison 
+
+b *auth+286
+
+on voit notre valeur ds eax don le mdp sera ds ebp - 10 on a juste a la lire
+
+x/x $ebp-0x10
+
+pour wassim en id le mdp sera donc 6232797 

