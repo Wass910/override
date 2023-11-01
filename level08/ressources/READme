@@ -1,0 +1,13 @@
+pour ce niveau on a juste a creer un lien symbolique sur le fichier de pass du level9 car le binaire essaye d ouvrir un fichier mis en argument et le met ds le dossier back up
+
+on chmod 777 .
+
+pour avoir les droits ds le dossier
+
+puis on ft un lien sympolique 
+
+ln -s /home/users/level09/.pass flag
+
+puis on execute le binaire avec flag
+
+et le flag sera ds le dossier backup 
